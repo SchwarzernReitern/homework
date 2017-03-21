@@ -56,6 +56,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
+			<dependency>
+				<groupId>com.aliyun.api</groupId>
+				<artifactId>alibaba</artifactId>
+				<version>1.0</version>
+				<scope>system</scope>
+				<systemPath>${project.basedir}/lib/taobao-sdk-java-auto_1455552377940-20160607.jar</systemPath>
+			</dependency>
 	</dependencies>
 
 	<build>
