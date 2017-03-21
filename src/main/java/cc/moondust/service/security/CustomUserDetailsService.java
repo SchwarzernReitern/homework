@@ -1,7 +1,7 @@
 package cc.moondust.service.security;
 
 import cc.moondust.entity.User;
-import cc.moondust.repository.UserRository;
+import cc.moondust.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,12 +15,12 @@ import org.springframework.stereotype.Service;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    UserRository userRository;
+    UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userRository.findOneByUsername(s);
-        if (user == null){
+        User user = userRepository.findOneByUsername(s);
+        if (user == null) {
             throw new UsernameNotFoundException("没有用户");
         }
         return user;
