@@ -1,5 +1,6 @@
 package cc.moondust.exception.resolver;
 
+import cc.moondust.exception.BaseException;
 import cc.moondust.exception.BusinessException;
 import cc.moondust.exception.ParamsException;
 import cc.moondust.exception.UnKnowException;
@@ -25,21 +26,27 @@ public class CommonExceptionResolver {
 
     @ResponseBody
     @ExceptionHandler(ParamsException.class)
-    public Object doForParamException(ParamsException e) {
-        return e.getMessage();
+    public Object doForParamException(ParamsException e, HttpServletResponse response) {
+        return getErr(e, response);
+    }
+
+    private Object getErr(BaseException e, HttpServletResponse response) {
+        response.setStatus(e.getCode());
+        ResponseEntity entity = new ResponseEntity(e.getCode(), e.getMessage(), e.getStackTrace().toString());
+        return entity;
     }
 
     @ResponseBody
     @ExceptionHandler(UnKnowException.class)
-    public Object doForUnKnowException(UnKnowException e) {
-        return e.getMessage();
+    public Object doForUnKnowException(UnKnowException e, HttpServletResponse response) {
+        return getErr(e, response);
     }
 
 
     @ResponseBody
     @ExceptionHandler(BusinessException.class)
-    public Object doForBusinessException(BusinessException e) {
-        return e.getMessage();
+    public Object doForBusinessException(BusinessException e, HttpServletResponse response) {
+        return getErr(e, response);
     }
 
 }

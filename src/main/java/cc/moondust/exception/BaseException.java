@@ -12,4 +12,8 @@ public abstract class BaseException extends Exception {
     }
     private BaseException() {
     }
+
+    public int getCode() {
+        return code;
+    }
 }
