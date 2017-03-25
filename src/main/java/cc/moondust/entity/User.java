@@ -26,10 +26,10 @@ public class User implements UserDetails {
     @Column(name = "user_id", length = 32)
     private String userId;
 
-    @Column(name = "username", unique = true, nullable = false, length = 5)
+    @Column(name = "username", unique = true, nullable = false, length = 20)
     private String username;
 
-    @Column(name = "password", nullable = false, length = 8)
+    @Column(name = "password", nullable = false, length = 32)
     private String password;
 
 
@@ -53,10 +53,6 @@ public class User implements UserDetails {
 
     @Column(name = "last_updatetime")
     private Date lastUpdateTime = new Date();
-
-
-    @Column(name = "user_type")
-    private String userType;
 
     @Column(name = "auths")
     private String auths;
@@ -154,14 +150,6 @@ public class User implements UserDetails {
 
     public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
-    }
-
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
     }
 
     public UserProfile getUserProfile() {

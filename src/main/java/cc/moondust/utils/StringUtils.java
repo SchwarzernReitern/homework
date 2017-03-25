@@ -7,10 +7,10 @@ public class StringUtils {
 
 
     public static boolean isEmpty(String str) {
+        if (str == null)
+            return true;
         str = str.trim();
         if (str.length() == 0)
-            return true;
-        if (str == null)
             return true;
         return false;
     }

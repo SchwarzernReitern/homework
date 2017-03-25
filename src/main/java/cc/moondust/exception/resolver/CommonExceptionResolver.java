@@ -26,20 +26,20 @@ public class CommonExceptionResolver {
     @ResponseBody
     @ExceptionHandler(ParamsException.class)
     public Object doForParamException(ParamsException e) {
-        return "ParamsException";
+        return e.getMessage();
     }
 
     @ResponseBody
     @ExceptionHandler(UnKnowException.class)
     public Object doForUnKnowException(UnKnowException e) {
-        return "UnKnowException";
+        return e.getMessage();
     }
 
 
     @ResponseBody
     @ExceptionHandler(BusinessException.class)
     public Object doForBusinessException(BusinessException e) {
-        return "BusinessException";
+        return e.getMessage();
     }
 
 }

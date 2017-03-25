@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 /**
  * Created by MIKU on 2017/3/19.
  */
-@Service
+@Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired

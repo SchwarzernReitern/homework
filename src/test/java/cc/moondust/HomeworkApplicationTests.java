@@ -4,6 +4,7 @@ import cc.moondust.entity.Student;
 import cc.moondust.entity.Teacher;
 import cc.moondust.entity.User;
 import cc.moondust.repository.UserRepository;
+import cc.moondust.service.UserDetailService;
 import cc.moondust.utils.AlibabaUtil;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
@@ -13,6 +14,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -23,7 +27,13 @@ public class HomeworkApplicationTests {
     UserRepository userRepository;
 
     @Autowired
+    UserDetailService userDetailService;
+
+    @Autowired
     DefaultTaobaoClient defaultTaobaoClient;
+
+    @Autowired
+    RedisTemplate<String,String> redisTemplate;
 
     @Test
     public void contextLoads() {
@@ -53,5 +63,15 @@ public class HomeworkApplicationTests {
 
     }
 
+    @Test
+    public void testRedis(){
+//        User user = new User();
+//        user.setUserId("11123421");
+//        ValueOperations<String, String> stringUserValueOperations = redisTemplate.opsForValue();
+//        stringUserValueOperations.set("hello",user.toString());
+        for (int i = 0; i <10 ; i++) {
+            userDetailService.findUser("tom");
+        }
+    }
 
 }

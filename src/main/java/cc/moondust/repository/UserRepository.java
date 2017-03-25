@@ -2,6 +2,7 @@ package cc.moondust.repository;
 
 import cc.moondust.entity.Teacher;
 import cc.moondust.entity.User;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
