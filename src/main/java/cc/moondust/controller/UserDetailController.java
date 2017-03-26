@@ -1,21 +1,20 @@
 package cc.moondust.controller;
 
 import cc.moondust.entity.User;
-import cc.moondust.exception.BusinessException;
 import cc.moondust.exception.ParamsException;
 import cc.moondust.exception.UnKnowException;
-import cc.moondust.repository.UserRepository;
 import cc.moondust.service.SendMsmService;
 import cc.moondust.service.UserDetailService;
-import cc.moondust.utils.ResponseUtil;
 import cc.moondust.utils.SendMsmUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by MIKU on 2017/3/19.
@@ -69,12 +68,14 @@ public class UserDetailController {
      */
     @RequestMapping(value = "/verificationCode", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean getVerificationCode(String phone) throws UnKnowException {
+    public Object getVerificationCode(String phone) throws UnKnowException, ParamsException {
         String code = SendMsmUtil.getRandNum();
         //验证码存入缓存
+        if (phone.length() != 11) {
+            throw new ParamsException(510, "phone error");
+        }
         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
         valueOperations.set(phone, code, 10 * 60 * 1000);
-
         boolean res = sendMsmService.sendMsmCode(phone, code);
         return res;
     }

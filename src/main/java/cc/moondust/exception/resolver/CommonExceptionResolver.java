@@ -49,4 +49,12 @@ public class CommonExceptionResolver {
         return getErr(e, response);
     }
 
+    @ResponseBody
+    @ExceptionHandler(Exception.class)
+    public Object doForException(Exception e, HttpServletResponse response) {
+        response.setStatus(500);
+        ResponseEntity entity = new ResponseEntity(500, e.getMessage(), e.getStackTrace().toString());
+        return entity;
+    }
+
 }
