@@ -13,21 +13,67 @@ public class Question{
     @Id
     private String questionId;
 
+    //题目内容
     private String questionContent;
 
+    //选项
     private Map<String,String> options = new HashMap<>();
 
+    //正确选项
     private Set<String> trueOption = new HashSet<>();
 
+    //问题类型(单选/多选..)
     private QuestionType questionType = QuestionType.CHOOSE_SINGLE;
 
+    //是否子题目
     private Boolean isSub = false;
+
+    //子题目号
+    private List<String> subQuestions;
+
+    //科目
+    private String subjectId;
+
+    //年级
+    private String gradeId;
+
+    //标签
+    private List<String> tips;
+
+    //创建人
+    private String createBy;
+
+    public String getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(String subjectId) {
+        this.subjectId = subjectId;
+    }
+
+    public String getGradeId() {
+        return gradeId;
+    }
+
+    public void setGradeId(String gradeId) {
+        this.gradeId = gradeId;
+    }
+
+    public List<String> getTips() {
+        return tips;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
 
     public List<String> getSubQuestions() {
         return subQuestions;
     }
-
-    private List<String> subQuestions;
 
     public String getQuestionId() {
         return questionId;
@@ -69,6 +115,14 @@ public class Question{
         }
         subQuestions.add(questionId);
         return  this;
+    }
+
+    public Question addTip(String tip){
+        if(tips == null){
+            tips = new ArrayList<>();
+        }
+        tips.add(tip);
+        return this;
     }
 
     public QuestionType getQuestionType() {
