@@ -3,18 +3,11 @@ package cc.moondust.controller;
 import cc.moondust.entity.User;
 import cc.moondust.exception.BusinessException;
 import cc.moondust.exception.ParamsException;
-import cc.moondust.exception.UnKnowException;
 import cc.moondust.repository.UserRepository;
-import cc.moondust.service.SendMsmService;
 import cc.moondust.service.UserDetailService;
-import cc.moondust.utils.ResponseUtil;
-import cc.moondust.utils.SendMsmUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -27,80 +20,27 @@ public class UserDetailController {
     @Autowired
     UserDetailService userDetailService;
 
-    @Autowired
-    SendMsmService sendMsmService;
-
-    @Autowired
-    RedisTemplate<String, String> redisTemplate;
-
-    /**
-     * 注册
-     *
-     * @param username
-     * @param password
-     * @param code
-     * @return
-     * @throws ParamsException
-     */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    public User insertUser(@RequestParam("username") String username,
-                           @RequestParam("password") String password,
-                           @RequestParam("code") String code) throws ParamsException {
-        //验证码存入缓存
-        ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
-        String tureCode = valueOperations.get(username);
-        if (code.equals(tureCode)) {
-            User user = new User();
-            user.setUsername(username);
-            user.setPassword(password);
-            User register = userDetailService.register(user);
-            register.setUserProfile(null);
-            return register;
-        } else {
-            throw new ParamsException(402, "code error");
-        }
+    public User insertUser(@RequestParam("username") String username, @RequestParam("password") String password) {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        User register = userDetailService.register(user);
+        return register;
     }
 
-    /**
-     * 获取验证码
-     *
-     * @return
-     */
-    @RequestMapping(value = "/verificationCode", method = RequestMethod.POST)
+    @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Boolean getVerificationCode(String phone) throws UnKnowException {
-        String code = SendMsmUtil.getRandNum();
-        //验证码存入缓存
-        ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
-        valueOperations.set(phone, code, 10 * 60 * 1000);
-
-        boolean res = sendMsmService.sendMsmCode(phone, code);
-        return res;
+    public boolean deleteUser(@PathVariable("userId") String userId) throws BusinessException {
+        throw new BusinessException(123, 10 + "");
     }
 
-    /**
-     * 登陆
-     *
-     * @param username
-     * @param password
-     * @return
-     * @throws ParamsException
-     */
-    @RequestMapping("/login")
-    @ResponseBody
-    public String userLogin(String username, String password) throws ParamsException {
-        User user = userDetailService.findUserByName(username);
-        if (!ObjectUtils.isEmpty(user) && password.equals(user.getPassword())) {
-            return "login success";
-        } else {
-            throw new ParamsException(402, "password is error");
-        }
-    }
 
-    @RequestMapping("/error")
     @ResponseBody
-    public Object getError() throws Exception {
-        return null;
+    @RequestMapping("/exception")
+    public String exceptionTest() throws ParamsException {
+
+        throw new ParamsException(200, "asd");
     }
 }
