@@ -30,11 +30,7 @@ public class CommonExceptionResolver {
         return getErr(e, response);
     }
 
-    private Object getErr(BaseException e, HttpServletResponse response) {
-        response.setStatus(e.getCode());
-        ResponseEntity entity = new ResponseEntity(e.getCode(), e.getMessage(), e.getStackTrace().toString());
-        return entity;
-    }
+
 
     @ResponseBody
     @ExceptionHandler(UnKnowException.class)
@@ -49,11 +45,10 @@ public class CommonExceptionResolver {
         return getErr(e, response);
     }
 
-    @ResponseBody
-    @ExceptionHandler(Exception.class)
-    public Object doForException(Exception e, HttpServletResponse response) {
-        response.setStatus(500);
-        ResponseEntity entity = new ResponseEntity(500, e.getMessage(), e.getStackTrace().toString());
+
+    private Object getErr(BaseException e, HttpServletResponse response) {
+        response.setStatus(e.getCode());
+        ResponseEntity entity = new ResponseEntity(e.getCode(), e.getMessage(), e.getStackTrace().toString());
         return entity;
     }
 

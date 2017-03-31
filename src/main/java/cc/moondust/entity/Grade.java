@@ -25,4 +25,28 @@ public class Grade {
             joinColumns = {@JoinColumn(name = "grade_id")},
             inverseJoinColumns = {@JoinColumn(name = "subject_id")})
     public Set<Subject> subjects;
+
+    public String getGradeId() {
+        return gradeId;
+    }
+
+    public void setGradeId(String gradeId) {
+        this.gradeId = gradeId;
+    }
+
+    public Integer getGradeNum() {
+        return gradeNum;
+    }
+
+    public void setGradeNum(Integer gradeNum) {
+        this.gradeNum = gradeNum;
+    }
+
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
+    }
 }

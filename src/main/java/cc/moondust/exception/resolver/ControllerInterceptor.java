@@ -1,5 +1,6 @@
 package cc.moondust.exception.resolver;
 
+import cc.moondust.exception.BaseException;
 import cc.moondust.exception.UnKnowException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -29,16 +30,17 @@ public class ControllerInterceptor {
      * @return JsonResult（被拦截方法的执行结果，或需要登录的错误提示。）
      */
     @Around("controllerMethodPointcut()") //指定拦截器规则；也可以直接把“execution(* com.xjj.........)”写进这里
-    public Object Interceptor(ProceedingJoinPoint pjp) throws UnKnowException {
+    public Object Interceptor(ProceedingJoinPoint pjp) throws Throwable {
         try {
             Object proceed = pjp.proceed();
-            if (proceed == null) {
-                throw new Exception("response body is empty");
-            }
             Object result = new ResponseEntity("success", proceed);
             return result;
-        } catch (Throwable throwable) {
-            throw new UnKnowException(500, throwable.getMessage());
+        }catch (Exception e){
+            if(e instanceof BaseException){
+                throw e;
+            }else {
+                throw new  UnKnowException(500,e.getMessage());
+            }
         }
     }
 
