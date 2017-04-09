@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity(name = "question_proxy")
 public class QuestionProxy {
     @Id
-    @GenericGenerator(name = "idGenerator", strategy = "uuid") //这个是hibernate的注解
+    @GenericGenerator(name = "idGenerator", strategy = "uuid2") //这个是hibernate的注解
     @GeneratedValue(generator = "idGenerator") //使用uuid的生成策略
     @Column(name = "question_proxy_id", length = 32)
     private String questionId;

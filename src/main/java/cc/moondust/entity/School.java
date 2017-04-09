@@ -14,7 +14,7 @@ import javax.persistence.Id;
 public class School {
 
     @Id
-    @GenericGenerator(name = "idGenerator", strategy = "uuid") //这个是hibernate的注解
+    @GenericGenerator(name = "idGenerator", strategy = "uuid2") //这个是hibernate的注解
     @GeneratedValue(generator = "idGenerator") //使用uuid的生成策略
     @Column(name = "school_id", length = 32)
     private String schoolId;

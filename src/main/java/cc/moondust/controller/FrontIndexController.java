@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by MIKU on 2017/3/18.
  */
@@ -23,9 +25,8 @@ public class FrontIndexController {
     @RequestMapping("/api/in")
     @ResponseBody
     @Transactional()
-    public String index() throws ParamsException, UnKnowException {
-
-        sendMsmService.sendMsmCode("15655251016", "123456");
+    public Object index(HttpSession session) throws ParamsException, UnKnowException {
+        session.setAttribute("demo","demo");
         return "OK";
     }
 }

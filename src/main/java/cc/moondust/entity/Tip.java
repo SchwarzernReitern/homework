@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Entity(name = "tip")
 public class Tip {
     @Id
-    @GenericGenerator(name = "idGenerator", strategy = "uuid") //这个是hibernate的注解
+    @GenericGenerator(name = "idGenerator", strategy = "uuid2") //这个是hibernate的注解
     @GeneratedValue(generator = "idGenerator") //使用uuid的生成策略
     @Column(name = "tip_id", length = 32)
     private String tipId;
