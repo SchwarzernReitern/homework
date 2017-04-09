@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -35,6 +37,14 @@ public class QuestionController {
         }else {
             throw new ParamsException(402,"题目不存在");
         }
+    }
+
+    @RequestMapping(value = "/recordquestion", method = RequestMethod.POST)
+    @ResponseBody
+    public Object recordQuestion(@RequestParam(name = "question", required = false)Question question){
+
+
+        return null;
     }
 
 }

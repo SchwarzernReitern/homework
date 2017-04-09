@@ -43,6 +43,17 @@ public class Question{
     //创建人
     private String createBy;
 
+    //问题解析
+    private String questionParse;
+
+    public String getQuestionParse() {
+        return questionParse;
+    }
+
+    public void setQuestionParse(String questionParse) {
+        this.questionParse = questionParse;
+    }
+
     public String getSubjectId() {
         return subjectId;
     }

@@ -10,17 +10,14 @@ import cc.moondust.repository.mongo.PaperRepository;
 import cc.moondust.repository.mongo.QuestionRepository;
 import cc.moondust.service.UserDetailService;
 import cc.moondust.utils.AlibabaUtil;
-import com.mongodb.util.JSON;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
 import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
-import net.minidev.json.JSONUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -38,8 +35,8 @@ public class HomeworkApplicationTests {
     @Autowired
     DefaultTaobaoClient defaultTaobaoClient;
 
-    @Autowired
-    RedisTemplate<String,String> redisTemplate;
+//    @Autowired
+//    RedisTemplate<String,String> redisTemplate;
 
     @Autowired
     QuestionRepository questionRepository;
