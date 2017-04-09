@@ -3,6 +3,7 @@ package cc.moondust;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.gridfs.GridFSDBFile;
+import com.mongodb.gridfs.GridFSFile;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,11 @@ public class PictureStorageTest {
     public void storePictureToGirdFs(){
 
         try {
-            InputStream inputStream = new FileInputStream("F:/英雄时刻/lol.gif");
+            InputStream inputStream = new FileInputStream("D:/1.jpg");
             DBObject metaData = new BasicDBObject();
-            gridFsOperations.store(inputStream, "lol", metaData);
+            metaData.put("createBy","jiang");
+            GridFSFile lol = gridFsTemplate.store(inputStream, "lol", metaData);
+            System.out.println(lol.getId());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

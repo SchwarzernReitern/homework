@@ -11,6 +11,8 @@ import org.springframework.context.annotation.PropertySources;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.convert.MongoConverter;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 /**
  * Created by Tristan on 17/4/9.
@@ -40,6 +42,7 @@ public class BeanFactory {
                 converter
         );
     }
+
 
 
 }
