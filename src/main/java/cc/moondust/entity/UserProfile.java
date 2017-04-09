@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class UserProfile {
 
     @Id
-    @GenericGenerator(name = "idGenerator", strategy = "uuid")
+    @GenericGenerator(name = "idGenerator", strategy = "uuid2")
     @GeneratedValue(generator = "idGenerator")
     @Column(name = "user_profile_id", length = 32)
     private String userProfileId;

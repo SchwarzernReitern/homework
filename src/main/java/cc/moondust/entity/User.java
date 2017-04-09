@@ -21,7 +21,7 @@ public class User implements UserDetails {
     static String split = ";";
     @Id
     //jpa (hibernate实现)的UUID生成主键策略    //eclipse会提示错误，但程序可以执行
-    @GenericGenerator(name = "idGenerator", strategy = "uuid") //这个是hibernate的注解
+    @GenericGenerator(name = "idGenerator", strategy = "uuid2") //这个是hibernate的注解
     @GeneratedValue(generator = "idGenerator") //使用uuid的生成策略
     @Column(name = "user_id", length = 32)
     private String userId;
