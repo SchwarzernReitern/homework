@@ -1,12 +1,16 @@
 package cc.moondust.config;
 
 import com.taobao.api.DefaultTaobaoClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.convert.MongoConverter;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 
 /**
  * Created by Tristan on 17/4/9.
@@ -27,4 +31,15 @@ public class BeanFactory {
     public DefaultTaobaoClient buildTaobaoClient() {
         return new DefaultTaobaoClient(url, appKey, secret);
     }
+
+
+    @Bean("gridFsTemplate")
+    public GridFsTemplate buildGridFsTemplate(@Autowired MongoDbFactory dbFactory, @Autowired MongoConverter converter) {
+        return new GridFsTemplate(
+                dbFactory,
+                converter
+        );
+    }
+
+
 }

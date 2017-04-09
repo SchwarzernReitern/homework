@@ -1,6 +1,5 @@
 package cc.moondust.controller;
 
-import cc.moondust.entity.mongo.Question;
 import cc.moondust.exception.ParamsException;
 import cc.moondust.exception.UnKnowException;
 import cc.moondust.service.SendMsmService;
@@ -26,7 +25,15 @@ public class FrontIndexController {
     @ResponseBody
     @Transactional()
     public Object index(HttpSession session) throws ParamsException, UnKnowException {
-        session.setAttribute("demo","demo");
+        session.setAttribute("demo", "demo");
         return "OK";
+    }
+
+    @RequestMapping("/api/out")
+    @ResponseBody
+    @Transactional()
+    public Object indexO(HttpSession session) throws ParamsException, UnKnowException {
+        Object demo = session.getAttribute("demo");
+        return demo;
     }
 }

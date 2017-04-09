@@ -78,24 +78,6 @@ public class UserDetailController {
         return res;
     }
 
-    /**
-     * 登陆
-     *
-     * @param username
-     * @param password
-     * @return
-     * @throws ParamsException
-     */
-    @RequestMapping("/login")
-    @ResponseBody
-    public Object userLogin(String username, String password) throws ParamsException {
-        User user = userDetailService.findUserByName(username);
-        if (!ObjectUtils.isEmpty(user) && password.equals(user.getPassword())) {
-            return "login success";
-        } else {
-            throw new ParamsException(402, "password is error");
-        }
-    }
 
     @RequestMapping("/error")
     @ResponseBody
