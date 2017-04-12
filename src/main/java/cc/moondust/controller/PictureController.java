@@ -1,12 +1,17 @@
 package cc.moondust.controller;
 
+import cc.moondust.exception.ParamsException;
 import cc.moondust.exception.UnKnowException;
 import cc.moondust.service.PictureStorageService;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSFile;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -66,12 +71,14 @@ public class PictureController {
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public Object uploadPicture(MultipartHttpServletRequest request
-            , @RequestParam(name = "pic_name", required = true) MultipartFile[] pics
-    ) {
-        MultipartFile file = pics[0];
+    @ResponseBody
+    public Object uploadPicture(@RequestParam(value = "file", required = false) MultipartFile file) throws Exception {
+        if (ObjectUtils.isEmpty(file)) throw new ParamsException(500, "asdasd");
 
-        return null;
+        DBObject dbObject = new BasicDBObject();
+        String filename = file.getOriginalFilename();
+        InputStream inputStream = file.getInputStream();
+        ObjectId picture = (ObjectId) pictureStorageService.storePicture(dbObject, inputStream, filename);
+        return picture.toString();
     }
-
 }

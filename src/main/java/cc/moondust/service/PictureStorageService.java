@@ -25,14 +25,13 @@ public class PictureStorageService {
     /**
      * 存储图片/文件
      * @param dbObject 数据源
-     * @param filePath 文件路径
+     * @param inputStream 输入流
      * @param fileName 文件名
      * @return 存储数据库的文件id
      * @throws ParamsException
      */
-    public Object storePicture(DBObject dbObject, String filePath, String fileName) throws ParamsException {
+    public Object storePicture(DBObject dbObject, InputStream inputStream, String fileName) throws ParamsException {
         try {
-            InputStream inputStream = new FileInputStream(filePath);
             GridFSFile store = gridFsTemplate.store(inputStream, fileName, dbObject);
             return store.getId();
         } catch (Exception e) {
